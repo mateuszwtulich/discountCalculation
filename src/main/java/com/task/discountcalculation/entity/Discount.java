@@ -1,0 +1,83 @@
+package com.task.discountcalculation.entity;
+
+import com.sun.istack.NotNull;
+import com.task.discountcalculation.entity.criterion.Criterion;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.List;
+
+public class Discount {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    @NotNull
+    @Column(name = "VALUE", nullable = false)
+    private int value = 0;
+
+    private List<Criterion> criterionList;
+
+    public Discount() {
+    }
+
+    public Discount(final DiscountBuilder builder) {
+        this.id = builder.id;
+        this.value = builder.value;
+        this.criterionList = builder.criterionList;
+    }
+
+    public static class DiscountBuilder {
+        private Long id;
+        private int value;
+        private List<Criterion> criterionList;
+
+
+        public DiscountBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public DiscountBuilder value(int value) {
+            this.value = value;
+            return this;
+        }
+
+        public DiscountBuilder criterionList(List<Criterion> criterionList) {
+            this.criterionList = criterionList;
+            return this;
+        }
+
+        public Discount build() {
+            return new Discount(this);
+        }
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public List<Criterion> getCriterionList() {
+        return criterionList;
+    }
+
+    public void setCriterionList(List<Criterion> criterionList) {
+        this.criterionList = criterionList;
+    }
+}
