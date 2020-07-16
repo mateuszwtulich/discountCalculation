@@ -15,7 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.sql.Timestamp;
+import java.sql.Time;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,7 +38,7 @@ public class Flight {
 
     @NotNull
     @Column(name = "TIME", nullable = false)
-    private Timestamp time;
+    private Time time;
 
     @NotNull
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
@@ -53,10 +53,13 @@ public class Flight {
     )    private List<DayOfWeek> days;
 
     @JsonIgnore
-    @OneToMany(targetEntity = FlightWithPrice.class, mappedBy = "flightWithPriceList", fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = FlightWithPrice.class, mappedBy = "flight", fetch = FetchType.LAZY)
     private List<FlightWithPrice> flightWithPriceList;
 
-    public Flight(Long id, String origin, String destination, Timestamp time, List<DayOfWeek> days) {
+    public Flight() {
+    }
+
+    public Flight(Long id, String origin, String destination, Time time, List<DayOfWeek> days) {
         this.id = id;
         this.origin = origin;
         this.destination = destination;
@@ -88,11 +91,11 @@ public class Flight {
         this.destination = destination;
     }
 
-    public Timestamp getTime() {
+    public Time getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(Time time) {
         this.time = time;
     }
 

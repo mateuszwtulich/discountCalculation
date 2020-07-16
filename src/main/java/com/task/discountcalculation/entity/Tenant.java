@@ -32,7 +32,7 @@ public class Tenant {
     private Date dateOfBirth;
 
     @NotNull
-    @Column(name = "GROUP", nullable = false)
+    @Column(name = "GROUP_NAME", nullable = false)
     private String group;
 
     public Tenant (){

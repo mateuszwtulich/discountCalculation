@@ -1,9 +1,9 @@
 package com.task.discountcalculation.repository;
 
-import com.task.discountcalculation.entity.criterion.DayOfBirthCriterion;
+import com.task.discountcalculation.entity.Discount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DayOfBirthCriterionRepository extends JpaRepository<DayOfBirthCriterion, Long> {
+public interface DiscountRepository extends JpaRepository<Discount, Long> {
 }

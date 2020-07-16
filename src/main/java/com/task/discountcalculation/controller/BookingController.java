@@ -12,8 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+@RestController
 public class BookingController {
     private IBookingService bookingService;
 
@@ -22,9 +24,9 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    @ApiOperation(value = "Creates project",
-            tags = {"project", "controller"},
-            response = Booking.class)
+    @ApiOperation(value = "Creates booking",
+            tags = {"booking", "controller"},
+            response = BookingDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successful request"),
             @ApiResponse(code = 400, message = "Bad request"),
@@ -33,10 +35,9 @@ public class BookingController {
             @ApiResponse(code = 422, message = "Could not process entity"),
             @ApiResponse(code = 429, message = "Too many requests"),
     })
-    @PostMapping(value = "/booking",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(value = "booking/{flightWithProjectId}/{tenantId}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public BookingDto buyFlight(@PathVariable(value = "flightId") Long flightWithProjectId, @PathVariable(value = "tenantId") Long tenantId) {
+    public BookingDto buyFlight(@PathVariable(value = "flightWithProjectId") Long flightWithProjectId, @PathVariable(value = "tenantId") Long tenantId) {
         return bookingService.buyFlight(flightWithProjectId, tenantId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY));
     }

@@ -1,16 +1,21 @@
 package com.task.discountcalculation.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+import com.task.discountcalculation.entity.criterion.DayOfWeekCriterion;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
-@Table(name = "DAY_OF_WEEK")
+@Table(name = "DAYS_OF_WEEK")
 public class DayOfWeek {
 
     @Id
@@ -20,6 +25,10 @@ public class DayOfWeek {
     @NotNull
     @Column(name = "NAME", nullable = false)
     private String name;
+
+    @JsonIgnore
+    @OneToMany(targetEntity = DayOfWeekCriterion.class, mappedBy = "dayOfWeek", fetch = FetchType.LAZY)
+    private List<DayOfWeekCriterion> dayOfWeekCriterionList;
 
     public DayOfWeek() {
     }

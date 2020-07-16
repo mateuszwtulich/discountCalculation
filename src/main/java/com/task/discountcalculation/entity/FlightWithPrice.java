@@ -12,11 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "FLIGHT_PRICE")
+@Table(name = "FLIGHTS_WITH_PRICE")
 public class FlightWithPrice {
 
     @Id
@@ -29,7 +29,7 @@ public class FlightWithPrice {
 
     @NotNull
     @Column(name = "Date", nullable = false)
-    private Timestamp time;
+    private Date date;
 
     @NotNull
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
@@ -39,10 +39,10 @@ public class FlightWithPrice {
     public FlightWithPrice() {
     }
 
-    public FlightWithPrice(Long id, Double flightPrice, Timestamp time, Flight flight) {
+    public FlightWithPrice(Long id, Double flightPrice, Date date, Flight flight) {
         this.id = id;
         this.flightPrice = flightPrice;
-        this.time = time;
+        this.date = date;
         this.flight = flight;
     }
 
@@ -58,16 +58,16 @@ public class FlightWithPrice {
         return flightPrice;
     }
 
-    public void setFlightPrice(Double basePrice) {
+    public void setFlightPrice(Double flightPrice) {
         this.flightPrice = flightPrice;
     }
 
-    public Timestamp getTime() {
-        return time;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTimestamp(Timestamp time) {
-        this.time = time;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Flight getFlight() {
@@ -85,12 +85,12 @@ public class FlightWithPrice {
         FlightWithPrice that = (FlightWithPrice) o;
         return id.equals(that.id) &&
                 flightPrice.equals(that.flightPrice) &&
-                time.equals(that.time) &&
+                date.equals(that.date) &&
                 flight.equals(that.flight);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, flightPrice, time, flight);
+        return Objects.hash(id, flightPrice, date, flight);
     }
 }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DestinationCriterionRepository extends JpaRepository<DestinationCriterion, Long> {
+    DestinationCriterion findByDestination(String destination);
 }
