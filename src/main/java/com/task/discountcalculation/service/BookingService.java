@@ -60,19 +60,16 @@ public class BookingService implements IBookingService{
                 discount.getCriterionList().add(criterion);
             }
         });
+
+        if(tenant.getGroup().equals(Group.B.name)){
+            discount.getCriterionList().clear();
+        }
         return discount;
     }
 
     public BookingDto toBookingDto(Booking booking){
         Double finalPrice = booking.getFlightWithPrice().getFlightPrice() - booking.getDiscount().getValue();
-        List<String> criteria = new ArrayList<>();
-        if(booking.getTenant().getGroup().equals(Group.A.name)){
-            criteria = booking.getDiscount().getCriterionList().stream()
-                    .map(criterion -> criterion.toString()).collect(Collectors.toList());
-        }
-        else if(booking.getTenant().getGroup().equals(Group.B.name)){
-            criteria.clear();
-        }
-        return new BookingDto(finalPrice, criteria);
+        return new BookingDto(finalPrice, booking.getDiscount().getCriterionList()
+                .stream().map(criterion -> criterion.toString()).collect(Collectors.toList()));
     }
 }
