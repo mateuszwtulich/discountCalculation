@@ -16,7 +16,7 @@ interview task - discount calculation
 * import gradle dependencies e.g. in Intellij
 * run the application, go to: http://localhost:8080/swagger-ui.html#/
 * test the main functionality under '/booking' endpoint
-* one case: flightId 1000, tenantId 100
-* second case: flightId 2000, tenantId 200
+* first case: flightId: 1000, tenantId: 100
+* second case: flightId: 2000, tenantId: 200
 * you can also mix those parameters in order to check all the cases
 * you can also check another endpoints
