@@ -10,7 +10,7 @@ interview task - discount calculation
 * Swagger2 for presenting endpoints
 
 # Development mode:
-* create databse under: localhost:5432/taskDB
+* create database under: localhost:5432/taskDB
 * username: test
 * password: test
 * import gradle dependencies e.g. in Intellij
